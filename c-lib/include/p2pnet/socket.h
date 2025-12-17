@@ -4,12 +4,12 @@
 #ifdef _WIN32
     #include <winsock2.h>
     #include <ws2tcpip.h>
-    typedef int ssize_t;  // Windows har ikke ssize_t
 #else
     #include <sys/socket.h>
     #include <netinet/in.h>
     #include <arpa/inet.h>
     #include <unistd.h>
+    #include <sys/types.h>
 #endif
 
 #include <stddef.h>
