@@ -96,7 +96,7 @@ int p2p_socket_connect(p2p_socket_t* sock, const char* ip, uint16_t port);
  * @param len Lengde på data
  * @return Antall bytes sendt, eller -1 ved feil
  */
-ssize_t p2p_socket_send(p2p_socket_t* sock, const void* data, size_t len);
+intptr_t p2p_socket_send(p2p_socket_t* sock, const void* data, size_t len);
 
 /**
  * Mottar data fra socket (blokkerende)
@@ -106,7 +106,7 @@ ssize_t p2p_socket_send(p2p_socket_t* sock, const void* data, size_t len);
  * @param len Maksimal lengde å motta
  * @return Antall bytes mottatt, 0 ved disconnect, -1 ved feil
  */
-ssize_t p2p_socket_recv(p2p_socket_t* sock, void* buffer, size_t len);
+intptr_t p2p_socket_recv(p2p_socket_t* sock, void* buffer, size_t len);
 
 /**
  * Lukker socket og frigjør ressurser
