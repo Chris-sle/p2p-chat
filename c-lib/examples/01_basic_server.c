@@ -14,7 +14,7 @@ void signal_handler(int signum) {
 
 int main() {
     printf("╔════════════════════════════════════════════════════════╗\n");
-    printf("║         P2P Basic Server Example (Enhanced)           ║\n");
+    printf("║         P2P Basic Server Example (Enhanced)            ║\n");
     printf("╚════════════════════════════════════════════════════════╝\n\n");
     
     // Initialiser biblioteket
