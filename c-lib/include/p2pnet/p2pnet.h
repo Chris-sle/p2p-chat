@@ -8,6 +8,8 @@
  */
 
 #include "p2pnet/socket.h"
-// Flere headers kommer senere (message.h, event_loop.h, etc.)
+#include "p2pnet/message.h"
+// Flere headers kommer senere (event_loop.h, etc.)
+
 
 #endif /* P2PNET_H */
