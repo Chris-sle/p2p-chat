@@ -180,6 +180,23 @@ int p2p_socket_connect(p2p_socket_t* sock, const char* ip, uint16_t port) {
     return 0;
 }
 
+int p2p_socket_set_nonblocking(p2p_socket_t* sock, int enabled) {
+    if (!sock) {
+        snprintf(error_buffer, sizeof(error_buffer), "Socket is NULL");
+        return -1;
+    }
+    
+    u_long mode = enabled ? 1 : 0;
+    if (ioctlsocket(sock->handle, FIONBIO, &mode) != 0) {
+        int err = WSAGetLastError();
+        snprintf(error_buffer, sizeof(error_buffer), 
+                 "ioctlsocket() failed with error: %d", err);
+        return -1;
+    }
+    
+    return 0;
+}
+
 ssize_t p2p_socket_send(p2p_socket_t* sock, const void* data, size_t len) {
     if (!sock) {
         snprintf(error_buffer, sizeof(error_buffer), "Socket is NULL");
