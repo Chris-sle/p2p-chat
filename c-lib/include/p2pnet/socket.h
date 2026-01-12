@@ -135,3 +135,11 @@ int p2p_socket_get_handle(p2p_socket_t* sock);
 #endif
 
 #endif /* P2PNET_SOCKET_H */
+
+/**
+ * Setter socket i non-blocking mode
+ * 
+ * @param sock Socket å sette non-blocking
+ * @return 0 ved suksess, -1 ved feil
+ */
+int p2p_socket_set_nonblocking(p2p_socket_t* sock, int enabled);
