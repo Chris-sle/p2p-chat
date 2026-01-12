@@ -9,6 +9,7 @@
 
 #include "p2pnet/socket.h"
 #include "p2pnet/message.h"
+#include "p2pnet/event_loop.h"
 // Flere headers kommer senere (event_loop.h, etc.)
 
 
