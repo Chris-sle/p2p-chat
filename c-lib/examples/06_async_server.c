@@ -4,6 +4,11 @@
 #include <stdio.h>
 #include <signal.h>
 
+// Callback deklarasjoner
+void on_server_accept(p2p_socket_t* server_sock, void* user_data);
+void on_client_data(p2p_socket_t* client, void* user_data);
+void on_client_error(p2p_socket_t* client, int error, void* user_data);
+
 // Global event loop for signal handler
 static p2p_event_loop_t* g_loop = NULL;
 
