@@ -228,7 +228,7 @@ Total lines of code: ~450
 
 **Mål:** Implementere message framing
 
-**Hvorfor:** TCP er en byte stream, ikke en message stream. Vi trenger en måte å skille hvor en melding slutter og neste begynner.
+**Hvorfor:** TCP er en byte stream, ikke en message stream. Jeg trenger en måte å skille hvor en melding slutter og neste begynner.
 
 **Løsning:** Length-prefix framing
 
@@ -250,7 +250,7 @@ Total lines of code: ~450
 
 ✅ **Milestone 1.1 er komplett og klar for produksjon (for enkle brukstilfeller)**
 
-**Godkjent av:** Chris
+**Godkjent av:** Chris-sle
 **Dato:** 17. desember 2025
 
 ---

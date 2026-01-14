@@ -434,7 +434,7 @@ p2p_message_create_binary(huge_data, 2GB);  // Should return NULL
 
 **Next:** Event loop for handling multiple clients simultaneously
 
-**Why:** Currently server handles one client at a time (sequential). We need async I/O for real P2P.
+**Why:** Currently server handles one client at a time (sequential). I need async I/O for real P2P.
 
 **Approach:** WSAPoll on Windows, epoll on Linux
 
@@ -470,7 +470,7 @@ p2p_message_create_binary(huge_data, 2GB);  // Should return NULL
 
 ---
 
-**Author:** Chris S. 
+**Author:** Chris-sle 
 **Created:** 15. desember 2025  
 **Completed:** 19. desember 2025  
 **Status:** Completed ✅

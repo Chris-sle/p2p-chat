@@ -28,7 +28,7 @@ Windows og Unix/Linux har ulike socket APIs:
 | Cleanup | `closesocket()` | `close()` |
 | Library link | `-lws2_32` | (ingen) |
 
-**Vi trenger:** En unified API som skjuler disse forskjellene.
+**trenger:** En unified API som skjuler disse forskjellene.
 
 ---
 
@@ -163,7 +163,7 @@ snprintf(error_buffer, sizeof(error_buffer),
 
 ### Unit Tests (Not implemented - using examples instead)
 
-We're using example programs as integration tests rather than unit tests for simplicity.
+I am using example programs as integration tests rather than unit tests for simplicity.
 
 ### Integration Tests
 
@@ -313,7 +313,7 @@ We're using example programs as integration tests rather than unit tests for sim
 - Setup guide
 - Final testing
 
-**Actual:** Completed in 1 day (experienced developer)
+**Actual:** Completed in 1 days
 
 ---
 
@@ -321,7 +321,7 @@ We're using example programs as integration tests rather than unit tests for sim
 
 **Next:** Message framing to handle TCP stream problem
 
-**Why:** TCP doesn't guarantee message boundaries. We need a protocol to separate messages.
+**Why:** TCP doesn't guarantee message boundaries. I need a protocol to separate messages.
 
 **Approach:** Length-prefix framing (4-byte header)
 
@@ -345,6 +345,6 @@ We're using example programs as integration tests rather than unit tests for sim
 
 ---
 
-**Author:** Chris S.  
+**Author:** Chris-sle  
 **Created:** 15. desember 2025  
 **Status:** Completed ✅

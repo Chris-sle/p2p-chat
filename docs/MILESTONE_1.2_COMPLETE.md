@@ -393,7 +393,7 @@ uint32_t host_length = ntohl(net_length); // 25
 
 **Mål:** Event Loop (Async I/O)
 
-**Hvorfor:** Nå kan vi bare håndtere én klient av gangen. Med event loop kan vi håndtere mange klienter samtidig uten threading.
+**Hvorfor:** Nå kan programmet bare håndtere én klient av gangen. Med event loop kan man håndtere mange klienter samtidig uten threading.
 
 **Teknologi:**
 - Windows: `WSAPoll()`
@@ -419,7 +419,7 @@ uint32_t host_length = ntohl(net_length); // 25
 - Error handling: ROBUST ✅
 - Testing: COMPREHENSIVE ✅
 
-**Godkjent av:** [Ditt navn]  
+**Godkjent av:** Chris-sle 
 **Dato:** 19. desember 2025
 
 ---

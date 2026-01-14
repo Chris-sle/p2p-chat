@@ -229,10 +229,3 @@ nc localhost 8080
 
 ### Debugging i VSCode
 Trykk `F5` for å starte debugger (krever `.vscode/launch.json` - se neste seksjon).
-
----
-
-## Neste Steg
-
-✅ Miljøet er klart!  
-→ Gå til **Milestone 1.1** og begynn å kode `socket.h` og `socket_win.c`
