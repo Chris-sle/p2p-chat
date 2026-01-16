@@ -377,7 +377,7 @@ docs/
 
 ---
 
-**Author:** [Your Name]  
+**Author:** Chris-sle   
 **Created:** 14. januar 2026  
 **Status:** Planning 📋
 
