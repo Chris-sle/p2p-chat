@@ -526,3 +526,217 @@ Timeline: Parallel (C1 + C2 + C3 simultaneously)
 **Benefit:** 10x throughput with minimal latency increase ✅
 
 ---
+
+## Milestone 2.1: Keypair & Identity 🔑
+
+### 08_generate_identity.exe - Generate Ed25519 Keypair
+
+Generates a new Ed25519 keypair for P2P identity.
+
+**Features:**
+- Ed25519 keypair generation
+- Base64 fingerprint display
+- PEM-like file format
+- Secure file permissions (0600)
+
+**Usage:**
+```bash
+build\08_generate_identity.exe
+```
+
+**Expected Output:**
+```
+========================================
+ P2P Identity Generator (Milestone 2.1)
+========================================
+
+[INFO] Generating Ed25519 keypair...
+[OK] Keypair generated
+
+========================================
+ Your P2P Identity:
+========================================
+vbX_SEj0gUskjRyCLccqDe_pjFHPMRBEkBBEx8ZTerw
+========================================
+
+[INFO] Saving to identity.key...
+[OK] Identity saved
+
+[WARN] Keep this file secure!
+[WARN] Anyone with this file can impersonate you!
+
+Backup recommendation:
+  - Copy to USB drive
+  - Do NOT upload to cloud
+  - Do NOT share with anyone
+```
+
+**Generated file:** `identity.key`
+
+**File format:**
+```
+-----BEGIN P2P PRIVATE KEY-----
+<Base64 encoded secret key (88 chars)>
+-----END P2P PRIVATE KEY-----
+-----BEGIN P2P PUBLIC KEY-----
+<Base64 encoded public key (44 chars)>
+-----END P2P PUBLIC KEY-----
+```
+
+---
+
+### 09_verify_identity.exe - Verify Identity File
+
+Loads and verifies an identity file.
+
+**Features:**
+- Load keypair from file
+- Verify keypair integrity
+- Display fingerprint
+
+**Usage:**
+```bash
+build\09_verify_identity.exe identity.key
+```
+
+**Expected Output:**
+```
+========================================
+ P2P Identity Verifier (Milestone 2.1) 
+========================================
+
+[INFO] Loading identity from identity.key...
+[OK] Identity loaded
+
+[OK] Keypair is valid
+
+========================================
+ Identity:
+========================================
+vbX_SEj0gUskjRyCLccqDe_pjFHPMRBEkBBEx8ZTerw
+========================================
+
+Share this fingerprint with peers to
+allow them to verify your identity.
+```
+
+---
+
+## Testing Milestone 2.1
+
+### Test 1: Generate Identity
+```bash
+build\08_generate_identity.exe
+```
+
+**Pass Criteria:** 
+- Keypair generated
+- Fingerprint displayed (43 characters)
+- `identity.key` file created
+
+---
+
+### Test 2: Verify Identity
+```bash
+build\09_verify_identity.exe identity.key
+```
+
+**Pass Criteria:**
+- Keypair loaded successfully
+- Keypair is valid
+- Fingerprint matches generated one
+
+---
+
+### Test 3: Load Non-Existent File
+```bash
+build\09_verify_identity.exe nonexistent.key
+```
+
+**Pass Criteria:**
+- Error message: "Failed to load identity"
+- Program exits with error code
+
+---
+
+### Test 4: Multiple Keypairs (Uniqueness)
+```bash
+# Generate first
+build\08_generate_identity.exe
+# Rename
+move identity.key identity1.key
+
+# Generate second
+build\08_generate_identity.exe
+# Rename
+move identity.key identity2.key
+
+# Verify both
+build\09_verify_identity.exe identity1.key
+build\09_verify_identity.exe identity2.key
+```
+
+**Pass Criteria:**
+- Both keypairs valid
+- Fingerprints are DIFFERENT
+
+---
+
+## Security Notes
+
+### Private Key Protection
+
+**Your `identity.key` file contains your private key!**
+
+**DO:**
+- Keep file secure (0600 permissions)
+- Backup to USB drive (offline)
+- Store in `~/.p2p/` directory
+
+**DON'T:**
+- Upload to cloud (Dropbox, Google Drive, etc.)
+- Commit to git
+- Email to anyone
+- Share with anyone
+
+---
+
+### Sharing Your Identity
+
+**Safe to share:**
+- ✅ Fingerprint (43-character Base64 string)
+- ✅ Public key (can extract from file manually)
+
+**NEVER share:**
+- ❌ `identity.key` file
+- ❌ Private key (secret key)
+- ❌ Anything in "BEGIN P2P PRIVATE KEY" section
+
+---
+
+## Comparison: Identity Systems
+
+### Traditional (Username/Password)
+```
+Username: alice
+Password: - - - - - - - - 
+
+Problems:
+- Centralized (server stores passwords)
+- Weak passwords common
+- Can be stolen/guessed
+- Need account registration
+```
+
+### P2P (Ed25519 Keypair)
+```
+Identity: vbX_SEj0gUskjRyCLccqDe_pjFHPMRBEkBBEx8ZTerw
+
+Benefits:
+- Decentralized (no server needed)
+- Cryptographically strong
+- Cannot be guessed
+- Self-sovereign (you control it)
+```
+
+---
