@@ -661,8 +661,8 @@ Milestone 2.2 complete when:
 
 ---
 
-**Author:** [Your Name]  
-**Created:** 21. januar 2026  
+**Author:** Chris-sle 
+**Created:** 21. januar 2026
 **Status:** Planning 📋
 
 ---
