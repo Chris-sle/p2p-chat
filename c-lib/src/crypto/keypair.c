@@ -209,3 +209,23 @@ int p2p_keypair_verify(const p2p_keypair_t* keypair) {
     
     return 0;  // Valid
 }
+
+int p2p_pubkey_from_fingerprint(uint8_t* pubkey, const char* fingerprint) {
+    if (!pubkey || !fingerprint) {
+        return -1;
+    }
+    
+    size_t decoded_len;
+    if (sodium_base642bin(pubkey, 32,
+                          fingerprint, strlen(fingerprint),
+                          NULL, &decoded_len, NULL,
+                          sodium_base64_VARIANT_ORIGINAL) != 0) {
+        return -1;
+    }
+    
+    if (decoded_len != 32) {
+        return -1;  // Wrong length
+    }
+    
+    return 0;
+}
