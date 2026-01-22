@@ -112,4 +112,14 @@ int p2p_keypair_verify(const p2p_keypair_t* keypair);
  */
 int p2p_crypto_init(void);
 
+/**
+ * Parse Base64 fingerprint to public key
+ * 
+ * @param pubkey Output buffer (32 bytes)
+ * @param fingerprint Base64 encoded fingerprint (43-44 chars)
+ * @return 0 on success, -1 on error
+ */
+int p2p_pubkey_from_fingerprint(uint8_t* pubkey, const char* fingerprint);
+
+
 #endif /* P2PNET_CRYPTO_H */
