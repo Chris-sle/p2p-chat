@@ -426,16 +426,3 @@ void benchmark_keypair_generation() {
 
 ---
 
-## Summary
-
-**Test infrastructure is now complete!**
-
-- **19 unit tests** across 4 milestones
-- **100% pass rate**
-- **Easy to add new tests**
-- **Automated test running**
-
-**To make and run ALL tests:**
-```bash
-mingw32-make run-tests
-```
