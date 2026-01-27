@@ -13,6 +13,10 @@ MU_TEST(test_keypair_generate) {
 }
 
 MU_TEST(test_keypair_save_load) {
+    // Cleanup any existing test file first
+    const char* filepath = "test_identity.key";
+    remove(filepath); 
+
     // Generate
     p2p_keypair_t* kp1 = p2p_keypair_generate();
     mu_check(kp1 != NULL);
