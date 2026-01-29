@@ -57,6 +57,11 @@ void p2p_keypair_free(p2p_keypair_t* keypair) {
 
 int p2p_keypair_save(const p2p_keypair_t* keypair, const char* filepath) {
     if (!keypair || !filepath) return -1;
+
+    #ifdef _WIN32
+        // FIX: Fjern read-only før vi åpner filen
+        SetFileAttributesA(filepath, FILE_ATTRIBUTE_NORMAL);
+    #endif
     
     FILE* f = fopen(filepath, "wb");
     if (!f) {
