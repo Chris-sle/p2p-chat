@@ -53,14 +53,21 @@ THREAD_RETURN server_thread_func(void* arg) {
     }
     
     // Perform handshake (accept any peer)
+    // Note: This may fail if client disconnects early
     server_session = p2p_handshake_server(client_sock, server_keypair, NULL, 0);
     
-    // Keep connection open briefly
-    #ifdef _WIN32
-        Sleep(1000);  // 1 second
-    #else
-        sleep(1);
-    #endif
+    // Don't fail if handshake fails (test expects this)
+    if (server_session) {
+        // Keep connection open briefly
+        #ifdef _WIN32
+            Sleep(1000);
+        #else
+            sleep(1);
+        #endif
+    } else {
+        // Handshake failed (expected in some tests)
+        // Just continue cleanup
+    }
     
     // Cleanup
     p2p_socket_close(client_sock);
@@ -255,12 +262,21 @@ MU_TEST(test_handshake_expected_peer_mismatch) {
                                                           fake_server->public_key);
     mu_check(client_session == NULL);  // Should fail!
     
+    // Close socket immediately so server sees disconnect
+    p2p_socket_close(client_sock);
+    
+    // Give server time to detect disconnect
+    #ifdef _WIN32
+        Sleep(100);
+    #else
+        usleep(100000);
+    #endif
+
     // Wait for server
     wait_for_thread(server_thread);
     
     // Cleanup
     p2p_keypair_free(fake_server);
-    p2p_socket_close(client_sock);
     p2p_cleanup();
     
     return NULL;
