@@ -15,7 +15,7 @@ Implementere end-to-end encrypted messaging ved å bruke session key fra handsha
 
 ---
 
-## Problemet vi løser
+## Problemet som løses
 
 ### Current State (etter Milestone 2.2)
 
@@ -32,7 +32,7 @@ Alice                                     Bob
 ❌ Anyone can modify messages             ❌ Anyone can modify messages
 ```
 
-**Problem:** Vi har en sikker session, men sender fortsatt data i klartekst!
+**Problem:** Man har en sikker session, men sender fortsatt data i klartekst!
 
 ---
 
@@ -58,7 +58,7 @@ Attacker cannot: read, modify, or replay messages ✅
 
 ## Security Properties
 
-### What we achieve:
+### What I achieve:
 
 | Property | How |
 |----------|-----|
