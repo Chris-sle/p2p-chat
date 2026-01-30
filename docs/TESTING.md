@@ -142,6 +142,37 @@ mingw32-make tests
 
 ---
 
+### Milestone 2.2: Handshake Protocol
+
+**File:** `tests/test_handshake.c`
+
+| Test | Description | Status |
+|------|-------------|--------|
+| `test_handshake_setup` | Generate test keypairs | ✅ |
+| `test_handshake_basic` | Basic client-server handshake | ✅ |
+| `test_handshake_expected_peer_match` | Handshake with correct expected peer | ✅ |
+| `test_handshake_expected_peer_mismatch` | Reject wrong peer identity | ✅ |
+| `test_handshake_session_key` | Verify session key derivation | ✅ |
+| `test_session_fingerprint` | Get peer fingerprint from session | ✅ |
+| `test_handshake_cleanup` | Cleanup test resources | ✅ |
+
+**Coverage:** 7/7 tests passing
+
+**Test scenarios:**
+- ✅ Mutual authentication (both sides verify identity)
+- ✅ Expected peer verification (accept specific peer)
+- ✅ Reject wrong peer (security test)
+- ✅ Session key derivation (both sides derive same key)
+- ✅ Peer fingerprint display
+- ✅ Graceful handling of failed handshakes
+
+**Notes:**
+- Tests use multi-threading (server runs in separate thread)
+- Port 9999 used for test communication
+- Server gracefully handles client disconnect during handshake
+
+---
+
 ## Writing New Tests
 
 ### Test Structure
@@ -397,7 +428,7 @@ jobs:
 | 1.2 (Message) | 80% | **100%** ✅ |
 | 1.3 (Event Loop) | 70% | **100%** ✅ |
 | 2.1 (Crypto) | 90% | **100%** ✅ |
-| 2.2 (Handshake) | 90% | **N/A** |
+| 2.2 (Handshake) | 90% | **100%** ✅ |
 | 2.3 (Encryption) | 90% | **N/A** |
 
 ---
