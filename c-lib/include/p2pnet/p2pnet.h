@@ -7,13 +7,17 @@
  * Dette er hovedheaderen. Inkluder denne i dine programmer.
  */
 
+ // Core functionality
 #include "p2pnet/socket.h"
 #include "p2pnet/message.h"
 #include "p2pnet/event_loop.h"
+
+// Cryptography (Phase 2)
 #include "p2pnet/crypto.h" 
 #include "p2pnet/session.h"
 #include "p2pnet/handshake.h"
-// Flere headers kommer senere (event_loop.h, etc.)
+#include "p2pnet/encryption.h"
+// Flere headers kommer senere...
 
 /**
  * Initialize P2PNet library (Winsock + libsodium)
