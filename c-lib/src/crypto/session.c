@@ -39,16 +39,19 @@ p2p_session_t* p2p_session_create(const uint8_t* session_key,
     return session;
 }
 
+// Get peer's public key from session
 const uint8_t* p2p_session_peer_pubkey(const p2p_session_t* session) {
     if (!session) return NULL;
     return session->peer_pubkey;
 }
 
+// Get session key (for encryption)
 const uint8_t* p2p_session_key(const p2p_session_t* session) {
     if (!session) return NULL;
     return session->session_key;
 }
 
+// Free session and securely wipe memory
 void p2p_session_free(p2p_session_t* session) {
     if (!session) return;
     
@@ -58,6 +61,7 @@ void p2p_session_free(p2p_session_t* session) {
     free(session);
 }
 
+// Get peer's fingerprint (Base64 encoded public key)
 const char* p2p_session_peer_fingerprint(const p2p_session_t* session,
                                           char* buffer,
                                           size_t buffer_size) {
@@ -71,4 +75,45 @@ const char* p2p_session_peer_fingerprint(const p2p_session_t* session,
     memset(temp.secret_key, 0, 64);  // Not used
     
     return p2p_keypair_fingerprint(&temp, buffer, buffer_size);
+}
+
+// Create a new session (internal use by handshake)
+p2p_session_t* p2p_session_create(void) {
+    p2p_session_t* session = (p2p_session_t*)malloc(sizeof(p2p_session_t));
+    if (!session) {
+        return NULL;
+    }
+    
+    // Initialize nonces to 0
+    session->send_nonce = 0;
+    session->recv_nonce = 0;
+    
+    return session;
+}
+
+// Free session and securely wipe memory
+void p2p_session_free(p2p_session_t* session) {
+    if (!session) {
+        return;
+    }
+    
+    // Securely wipe session key and nonces
+    sodium_memzero(session, sizeof(p2p_session_t));
+    free(session);
+}
+
+// Get peer's fingerprint (Base64 encoded public key)
+const char* p2p_session_peer_fingerprint(const p2p_session_t* session,
+                                          char* buffer,
+                                          size_t buffer_size) {
+    if (!session || !buffer || buffer_size < 45) {
+        return NULL;
+    }
+    
+    // Base64 encode public key (URL-safe, no padding)
+    sodium_bin2base64(buffer, buffer_size,
+                      session->peer_pubkey, 32,
+                      sodium_base64_VARIANT_URLSAFE_NO_PADDING);
+    
+    return buffer;
 }
